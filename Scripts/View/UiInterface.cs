@@ -7,6 +7,7 @@ namespace ShooterGame
         //private FlashLightUiText _flashLightUiText;
 
         private FlashLightUiText _flashLightUiImage;
+        private  UIHealthText _healthText;
 
 
         public FlashLightUiText FlashLightUiImage
@@ -19,7 +20,16 @@ namespace ShooterGame
             }
         }
 
-        
+
+        public   UIHealthText UIHealthText
+        {
+            get
+            {
+                if (!_healthText)
+                    _healthText = MonoBehaviour.FindObjectOfType<UIHealthText>();
+                return _healthText;
+            }
+        }
 
         //      public FlashLightUiText LightUiText
         //{

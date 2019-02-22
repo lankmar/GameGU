@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ShooterGame
 {
-    class Health : MonoBehaviour, IHealth
+    public class Health : MonoBehaviour, IHealth
     {
         [SerializeField]
         protected int maxHealth = 100;
@@ -14,7 +14,7 @@ namespace ShooterGame
         }
 
         [SerializeField]
-        protected int currentHealth = 75;
+        protected int currentHealth = 50;
         public int CurrentHealth { get { return currentHealth; } }
 
         [SerializeField]
@@ -107,6 +107,7 @@ namespace ShooterGame
 
         private IEnumerator StartRegeneration()
         {
+            Debug.Log("StartRegeneration");
             if (regenerationDelay > 0f)
                 yield return new WaitForSeconds(regenerationDelay);
 
@@ -142,7 +143,16 @@ namespace ShooterGame
             currentHealth = Mathf.Min(maxHealth, currentHealth += addАmount);
             return true;
         }
-    }
 
+        public virtual void IncrementHP(int addАmount)
+        {
+            if ((currentHealth >= maxHealth) || (addАmount <= 0))
+                return;
+             currentHealth = Mathf.Min(maxHealth, currentHealth += addАmount);
+            UiInterface ui = new UiInterface();
+            ui.UIHealthText.ShowHealth();
+        }
+       
+    }
     
 }

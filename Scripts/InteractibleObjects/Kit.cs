@@ -1,7 +1,25 @@
-﻿namespace ShooterGame
+﻿using UnityEngine;
+
+namespace ShooterGame
 {
-    class Kit
+    public class Kit : Health
     {
-        //аптечка
+       // [SerializeField] private float radius;
+        [SerializeField] private int force = 30;
+
+
+        public int Force { get => force; set => force = value; }
+
+        private void OnTriggerEnter(Collider other)
+        {
+
+            if (other.CompareTag("Player"))
+            {
+                GameObject go = other.gameObject;
+                Character _char = go.GetComponent<Character>();
+                _char.IncrementHealth(Force);
+                Destroy(gameObject);
+            }
+        }
     }
 }

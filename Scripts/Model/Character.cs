@@ -38,5 +38,9 @@ namespace ShooterGame
             base.TakeDamage(damageInfo);
         }
 
+        public override void IncrementHP(int addАmount)
+        {
+             base.IncrementHP(addАmount);
+        }
     }
 }

@@ -16,15 +16,14 @@ namespace ShooterGame
         {
             _light.GetComponent<Light>().color = Color.red;
             _light.GetComponent<Light>().intensity = 0;
-            //StartCoroutine(Light());
-            //_timeLight = 1;
-            //Explosion();
+          
         }
 
 
         private void OnTriggerExit(Collider other)
         {
-            Explosion();
+
+           // Explosion();
         }
 
         private void Explosion()
@@ -41,6 +40,8 @@ namespace ShooterGame
                 tempRigidbody.isKinematic = false;
                 tempRigidbody.AddExplosionForce(Force, transform.position, Radius, 0.0F);
             }
+
+            Destroy(gameObject, _timeLight);
         }
 
 
@@ -53,17 +54,17 @@ namespace ShooterGame
                 Character _char = go.GetComponent<Character>();
                 DamageInfo damage = new DamageInfo(20, null, null, EDamageType.Unknown);
                 _char.TakeDamage(damage );
+                _timeLight = 0.5f;
+                Explosion();
             }
-            Explosion();
 
-            //_timeLight = 0.5f;
         }
 
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, Radius);
-        }
+        //private void OnDrawGizmosSelected()
+        //{
+        //    Gizmos.color = Color.red;
+        //    Gizmos.DrawWireSphere(transform.position, Radius);
+        //}
 
         IEnumerator Light()
         {

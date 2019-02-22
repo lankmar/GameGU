@@ -19,7 +19,11 @@ namespace ShooterGame
 
 		public static Main Instance { get; private set; }
 		public Bot RefBotPrefab;
-		public int CountBot;
+        public Kit RefKitPrefab;
+        public Mina RefMinaPrefab;
+        public Respawner Respawner;
+        public int CountBot;
+        public int CountKit;
 
 		private void Awake()
 		{
@@ -38,15 +42,19 @@ namespace ShooterGame
 			WeaponController = new WeaponController();
 
 			BotController = new BotController();
+            Respawner = new Respawner();
 
-			Controllers = new BaseController[6];
+
+			Controllers = new BaseController[7];
 			Controllers[0] = FlashLightController;
 			Controllers[1] = InputController;
 			Controllers[2] = PlayerController;
 			Controllers[3] = WeaponController;
 			Controllers[4] = SelectionController;
 			Controllers[5] = BotController;
-		}
+            Controllers[6] = Respawner;
+
+        }
 
 		private void Start()
 		{
@@ -55,7 +63,9 @@ namespace ShooterGame
 			PlayerController.On();
 			BotController.On();
 			BotController.Init(CountBot);
-		}
+            Respawner.InitKit(CountKit);
+            Respawner.InitMina(CountKit);
+        }
 
 		private void Update()
 		{
